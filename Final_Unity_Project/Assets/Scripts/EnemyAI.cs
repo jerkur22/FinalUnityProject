@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class EnemyAI : MonoBehaviour
     float step;
     private BoxCollider2D spongeCollider;
     private BoxCollider2D me;
+    [SerializeField] private GameObject gameOverObject;
+    private Text gameOverText;
+
+    delegate void MyDelegate();
+    MyDelegate myDelegate;
 
     // Start is called before the first frame update
     void Start()
@@ -41,16 +47,22 @@ public class EnemyAI : MonoBehaviour
         me = GetComponent<BoxCollider2D>();
 
         int step = 1;
+
+        myDelegate = Die; 
+
+        gameOverText = gameOverObject.GetComponent<Text>();
+        gameOverText.gameObject.SetActive(false);
+        gameOverText.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Abs(transform.position.x) < 1.55 && Mathf.Abs(transform.position.y) < 1.55)
+        /*if (Mathf.Abs(transform.position.x) < 1.55 && Mathf.Abs(transform.position.y) < 1.55)
         {
             OnDisable();
             Destroy(this);
-        }
+        }*/
     }
 
     public void OnEnable()
@@ -73,5 +85,23 @@ public class EnemyAI : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, (new Vector3(0, 0, 0)), 1);
         }
 
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        myDelegate();
+        /*if (collision.gameObject.tag == "Spongebob")
+        {
+            Debug.Log("sponge2");
+            gameOverText.gameObject.SetActive(true);
+        }*/
+    }
+
+    // Delegate
+    void Die()
+    {
+        Debug.Log("Sponge");
+        gameOverText.gameObject.SetActive(true);
+        gameOverText.enabled = true;
     }
 }
