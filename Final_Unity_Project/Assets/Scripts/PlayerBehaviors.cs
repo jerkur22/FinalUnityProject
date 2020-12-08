@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerBehaviors : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class PlayerBehaviors : MonoBehaviour
 
     private static PlayerBehaviors _instance;
     public static PlayerBehaviors Instance { get { return _instance; } }
+    [SerializeField] private Text gameOverText;
 
     // Singleton
     void Awake()
@@ -57,5 +60,13 @@ public class PlayerBehaviors : MonoBehaviour
             }
         }
 
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.gameObject.tag == "planktonfreejpg")
+        {
+            gameOverText.gameObject.SetActive(true);
+        }
     }
 }
