@@ -90,6 +90,7 @@ public class EnemyAI : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         myDelegate();
+        OnDisable();
         /*if (collision.gameObject.tag == "Spongebob")
         {
             Debug.Log("sponge2");
