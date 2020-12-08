@@ -38,12 +38,12 @@ public class PlayerBehaviors : MonoBehaviour
 
             if (Input.GetKey("left"))
             {
-                degree += 5;
+                degree += 15;
                 transform.eulerAngles = Vector3.forward * degree;
             }
             if (Input.GetKey("right"))
             {
-                degree -= 5;
+                degree -= 15;
                 transform.eulerAngles = Vector3.forward * degree;
             }
         }
