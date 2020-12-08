@@ -7,17 +7,25 @@ public class PlayerBehaviors : MonoBehaviour
     public Rigidbody2D rb;
     private int degree;
 
-    // Start is called before the first frame update
+    private static PlayerBehaviors _instance;
+    public static PlayerBehaviors Instance { get { return _instance; } }
+
+    // Singleton
+    void Awake()
+    {
+        if (_instance != null && !_instance != this)
+        {
+            Destroy(this.gameObject);
+        } else
+        {
+            _instance = this;
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         degree = 1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void OnEnable()
@@ -30,6 +38,7 @@ public class PlayerBehaviors : MonoBehaviour
         StopCoroutine(RotateSpongebob());
     }
 
+    //Coroutine
     public IEnumerator RotateSpongebob()
     {
         while (true)
