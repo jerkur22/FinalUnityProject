@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour
     private BoxCollider2D me;
     [SerializeField] private GameObject gameOverObject;
     private Text gameOverText;
+    [SerializeField] private GameObject sadObject;
 
     delegate void MyDelegate();
     MyDelegate myDelegate;
@@ -104,5 +105,6 @@ public class EnemyAI : MonoBehaviour
         Debug.Log("Sponge");
         gameOverText.gameObject.SetActive(true);
         gameOverText.enabled = true;
+        sadObject.transform.position = new Vector2(0, 4);
     }
 }

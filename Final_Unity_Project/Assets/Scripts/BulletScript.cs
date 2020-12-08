@@ -7,7 +7,8 @@ public class BulletScript : MonoBehaviour
     public GameObject player;
     public Rigidbody2D rb;
     private bool fired;
-    
+    [SerializeField] private GameObject happyObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,15 @@ public class BulletScript : MonoBehaviour
         if (fired)
         {
             rb.velocity = transform.up * 4;
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Plankton")
+        {
+            Debug.Log("plank");
+            happyObject.transform.position = new Vector2(0, -4);
         }
     }
 }
